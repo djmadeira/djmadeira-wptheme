@@ -1,0 +1,154 @@
+*, *:before, *:after {
+  box-sizing:border-box;
+}
+
+.cf {
+  &:before, &:after {
+    display:table;
+    content:"";
+  }
+  &:after {
+    clear:both;
+  }
+}
+
+iframe, embed {
+  max-width:100%;
+}
+
+img {
+  max-width:100%;
+  height:auto;
+  margin: $margin;
+  box-shadow: $shadow;
+}
+
+p {
+  margin-top: $margin;
+  &:empty {
+    margin:0;
+    padding:0;
+  }
+}
+
+strong {
+  font-weight:bold;
+}
+
+em {
+  font-style:italic;
+}
+
+ol {
+  list-style: decimal;
+}
+ul {
+  list-style: disc;
+}
+ol, ul {
+  padding: $margin 0 0 $h2;
+  li {
+    margin-bottom: $margin;
+  }
+}
+
+pre {
+  background: $bg-color-dark;
+  display:block;
+  padding: 1em;
+  color: #333333;
+  font-family: 'Monaco', monospace;
+  line-height: 1.5;
+  margin-top: $margin;
+  box-shadow: $shadow;
+  white-space: pre-wrap;
+}
+code {
+  display:inline-block;
+  color: #333333;
+  font-family: 'Monaco', monospace;
+}
+
+blockquote {
+  display:inline-block;
+  position:relative;
+  padding: $margin $margin $margin $h3;
+  background: $bg-color-dark;
+  box-shadow: $shadow;
+  p {
+    position:relative;
+    z-index:1;
+  }
+  &:before, &:after {
+    position: absolute;
+    display:block;
+    color: $bg-color - #222;
+    font-size:5em;
+    z-index:0;
+    line-height:1;
+  }
+  &:before {
+    content:"\201F"; // Left curly quote
+    top: 0;
+    left:-0.1em;
+  }
+  &:after {
+    content:"\201D"; // Right curly quote
+    bottom: -0.5em;
+    right:-0.1em;
+    vertical-align:bottom;
+  }
+}
+
+// Forms & inputs
+input {
+  font-size:1em;
+}
+
+input[type="text"], input[type="email"], input[type="search"], input[type="url"], textarea {
+  -webkit-appearance: none;
+  background: $bg-color-dark;
+  border:none;
+  padding: $margin;
+  box-shadow: $shadow;
+}
+
+input[type="button"], input[type="submit"] {
+  -webkit-appearance:none;
+  font-size: 1em;
+  padding: $margin;
+  background: $bg-color-sticky;
+  border:none;
+  box-shadow: $shadow;
+  cursor:pointer;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, opacity 0.2s ease-out;
+  transform-origin: 50% 0;
+  &:hover {
+    transform: rotateX(30deg);
+    box-shadow: $shadow-alt;
+  }
+  &:active {
+    transform: rotateX(30deg) translateY(50%) rotateZ(10deg);
+    opacity: 0;
+  }
+}
+
+progress[value] {
+  -webkit-appearance:none;
+  box-shadow: $shadow;
+  &::-webkit-progress-bar {
+    background: $bg-color-dark;
+  }
+  &::-webkit-progress-value {
+    background: $link-color;
+    transition: width 2s ease;
+  }
+}
+
+// WP Styles
+.alignright {
+  float:right;
+}
+.alignleft {
+  float:left;
+}
