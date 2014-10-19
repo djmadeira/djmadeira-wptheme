@@ -24,11 +24,11 @@ gulp.task('css', function () {
 });
 
 gulp.task('critical', function () {
-  critical.findCritical('test/home.html', function (err, output) {
+  critical.findCritical('http://google.com/', function (err, output) {
     if (err) {
       throw new Error( err );
     } else {
-      fs.writeFileSync('css/crit.css', output);
+      fs.writeFile('css/crit.css', output);
     }
   });
 });
