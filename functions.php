@@ -52,38 +52,6 @@ function dj_write_header() {
 }
 add_action('wp_head', 'dj_write_header');
 
-function dj_add_comment_captcha() {
-  $operation = rand(1,3);
-  $num_one = rand(1, 5);
-  $num_two = rand(1, 5);
-  switch ($operation) {
-    case 1:
-      $op_text = 'Multiply';
-      $preposition = 'by';
-      $answer = $num_one * $num_two;
-      break;
-    case 2:
-      $num_one = rand(1, $num_two);
-      $op_text = 'Take';
-      $preposition = 'away from';
-      $answer = $num_two - $num_one;
-      break;
-    default:
-      $op_text = 'Add';
-      $preposition = 'and';
-      $answer = $num_one + $num_two;
-  }
-  ?>
-  {
-    "num_one": <?php echo $num_one; ?>,
-    "num_two": <?php echo $num_two; ?>,
-    "operator": <?php echo $operation; ?>
-  }
-  <?php
-  die();
-}
-add_action( 'wp_ajax_nopriv_custom_captcha', 'dj_add_comment_captcha' );
-
 function dj_add_captcha_field($fields) {
   $fields['captcha'] = '<p class="comment-form-captcha"><label for="captcha">To prove you\'re not a spam robot, please answer this question: <noscript>(unfortunately, this only works with javascript enabled)</noscript><span id="captcha-label-text"></span><span class="required">*</span></label>' . '<input id="captcha" name="captcha" type="text" size="2" aria-required="true"></p><input id="captcha-answer" name="captcha-answer" type="hidden">';
   return $fields;
