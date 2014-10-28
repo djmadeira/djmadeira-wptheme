@@ -1,4 +1,4 @@
-(function (window, document, undefined) {
+(function (undefined) {
 'use strict';
 
 // For animating skill items
@@ -23,4 +23,4 @@ window.addEventListener('load', function () {
   skillsBackground();
 });
 
-}(window, document));
+}());

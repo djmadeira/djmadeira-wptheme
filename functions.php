@@ -17,13 +17,19 @@ function dj_load_styles () {
   if (WP_DEBUG === true) {
     wp_enqueue_script('livereload', 'http://localhost:35729/livereload.js');
   }
+  if (is_single()) {
+    wp_enqueue_script('comment-captcha', get_template_directory_uri() . '/js/captcha.js', false, filemtime(get_stylesheet_directory() . '/js/captcha.js'), true);
+  }
+  if ( is_singular() && comments_open() && get_option('thread_comments') ) {
+    wp_enqueue_script( 'comment-reply' );
+  }
 }
 add_action('wp_enqueue_scripts', 'dj_load_styles' );
 
 function dj_write_header() {
   ?>
   <style>
-  <?php include(get_template_directory() . '/css/crit.css'); ?>
+  <?php // include(get_template_directory() . '/css/crit.css'); ?>
   </style>
   <?php if ( !current_user_can('edit_posts') ) { ?>
   <script>
@@ -46,7 +52,7 @@ function dj_write_header() {
 }
 add_action('wp_head', 'dj_write_header');
 
-function dj_add_comment_captcha( $fields ) {
+function dj_add_comment_captcha() {
   $operation = rand(1,3);
   $num_one = rand(1, 5);
   $num_two = rand(1, 5);
@@ -67,19 +73,28 @@ function dj_add_comment_captcha( $fields ) {
       $preposition = 'and';
       $answer = $num_one + $num_two;
   }
+  ?>
+  {
+    "num_one": <?php echo $num_one; ?>,
+    "num_two": <?php echo $num_two; ?>,
+    "operator": <?php echo $operation; ?>
+  }
+  <?php
+  die();
+}
+add_action( 'wp_ajax_nopriv_custom_captcha', 'dj_add_comment_captcha' );
 
-  $output = '<p class="comment-form-captcha"><label for="captcha">' . $op_text . ' ' . $num_one . ' ' . $preposition . ' ' . $num_two . ' (to prove you\'re not a spam robot).<span class="required">*</span></label>' . '<input id="captcha" name="captcha" type="text" size="2" aria-required="true"></p><input name="captcha-answer" type="hidden" value="' . $answer . '">';
-
-  $fields['captcha'] = $output;
+function dj_add_captcha_field($fields) {
+  $fields['captcha'] = '<p class="comment-form-captcha"><label for="captcha">To prove you\'re not a spam robot, please answer this question: <noscript>(unfortunately, this only works with javascript enabled)</noscript><span id="captcha-label-text"></span><span class="required">*</span></label>' . '<input id="captcha" name="captcha" type="text" size="2" aria-required="true"></p><input id="captcha-answer" name="captcha-answer" type="hidden">';
   return $fields;
 }
-add_filter( 'comment_form_default_fields', 'dj_add_comment_captcha' );
+add_filter('comment_form_default_fields', 'dj_add_captcha_field');
 
 function dj_validate_comment_captcha ($ID) {
   $answer = $_POST['captcha-answer'];
   $user_answer = $_POST['captcha'];
   if ($answer != $user_answer) {
-    wp_die('Captcha answer was incorrect');
+    wp_die('Sorry, the captcha answer wasn\'t correct. Try again?');
   }
 }
 add_action( 'pre_comment_on_post', 'dj_validate_comment_captcha' );

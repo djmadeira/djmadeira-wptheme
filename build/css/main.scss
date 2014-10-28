@@ -245,10 +245,8 @@ a {
   background: $bg-color-dark;
   margin-bottom: $margin;
   box-shadow: $shadow;
+  padding: 1em;
   @extend .cf;
-  article {
-    padding: 1em;
-  }
   .comment-meta {
     font-size: 0.86em;
   }
@@ -270,9 +268,6 @@ a {
   }
   &.depth-2 {
     background: $bg-color-dark - #111;
-  }
-  &.depth-3 {
-
   }
 }
 

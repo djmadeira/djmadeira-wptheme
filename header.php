@@ -27,6 +27,7 @@
    />
   <meta property="twitter:url" content="<?php the_permalink(); ?>" />
   <?php } // End if page ?>
+  <script type="text/javascript">window.wp={};window.wp.adminURL="<?php echo admin_url( 'admin-ajax.php' ); ?>";</script>
   <?php
   wp_head();
   ?>
