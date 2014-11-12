@@ -7,7 +7,7 @@ var newer = require('gulp-newer');
 var cssmin = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var pngcrush = require('imagemin-pngcrush');
-var critical = require('criticalcss');
+var critical = require('critical');
 var fs = require('fs');
 
 gulp.task('css', function () {
@@ -24,11 +24,18 @@ gulp.task('css', function () {
 });
 
 gulp.task('critical', function () {
-  critical.findCritical('http://google.com/', function (err, output) {
+  critical.generate({
+    base: 'test/',
+    src: 'home-source.html',
+    minify: true,
+    width: 320,
+    height: 480
+  }, function (err, output) {
     if (err) {
-      throw new Error( err );
+      throw err;
     } else {
-      fs.writeFile('css/crit.css', output);
+      console.log(output);
+      fs.writeFileSync('css/crit.css', output);
     }
   });
 });

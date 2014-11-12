@@ -13,9 +13,9 @@ add_action('init', 'dj_init_stuff');
 
 function dj_load_styles () {
   //wp_enqueue_style('fonts', 'http://fonts.googleapis.com/css?family=Oswald:400,300');
-  wp_enqueue_style('main', get_template_directory_uri() . '/css/main.css', false, filemtime(get_stylesheet_directory() . '/css/main.css'));
+  //wp_enqueue_style('main', get_template_directory_uri() . '/css/main.css', false, filemtime(get_stylesheet_directory() . '/css/main.css'));
   if (WP_DEBUG === true) {
-    wp_enqueue_script('livereload', 'http://localhost:35729/livereload.js');
+    //wp_enqueue_script('livereload', 'http://localhost:35729/livereload.js');
   }
   if (is_single()) {
     wp_enqueue_script('comment-captcha', get_template_directory_uri() . '/js/captcha.js', false, filemtime(get_stylesheet_directory() . '/js/captcha.js'), true);
@@ -28,8 +28,8 @@ add_action('wp_enqueue_scripts', 'dj_load_styles' );
 
 function dj_write_header() {
   ?>
-  <style>
-  <?php // include(get_template_directory() . '/css/crit.css'); ?>
+  <style id="inline-styles">
+  <?php include(get_template_directory() . '/css/crit.css'); ?>
   </style>
   <?php if ( !current_user_can('edit_posts') ) { ?>
   <script>
@@ -46,6 +46,7 @@ function dj_write_header() {
   <script>
   function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
   loadCSS('http://fonts.googleapis.com/css?family=Oswald:400,300');
+  loadCSS('<?php echo get_template_directory_uri() . '/css/main.css'; ?>');
   </script>
   <script async src=<?php echo get_template_directory_uri() . '/js/site.js?' . filemtime(get_stylesheet_directory() . '/js/site.js'); ?>></script>
   <?php
