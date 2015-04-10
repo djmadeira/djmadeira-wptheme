@@ -51,9 +51,7 @@ ul {
 }
 ol, ul {
   padding: $margin 0 0 $h2;
-  li {
-    margin-bottom: $margin;
-  }
+  line-height: 1.5;
 }
 
 pre {

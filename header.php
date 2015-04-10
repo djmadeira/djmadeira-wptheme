@@ -2,6 +2,7 @@
 <html>
 <head>
   <title><?php wp_title( '-', true, 'right' ); ?><?php bloginfo('name') ?> - <?php bloginfo('description') ?></title>
+  <meta name="description" content="<?php bloginfo("description"); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php if (is_page() || is_single() ) { ?>
   <meta property="twitter:card" content="summary" />
