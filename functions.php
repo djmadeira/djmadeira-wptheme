@@ -12,13 +12,10 @@ function dj_init_stuff () {
 add_action('init', 'dj_init_stuff');
 
 function dj_load_styles () {
-  //wp_enqueue_style('fonts', 'http://fonts.googleapis.com/css?family=Oswald:400,300');
-  //wp_enqueue_style('main', get_template_directory_uri() . '/css/main.css', false, filemtime(get_stylesheet_directory() . '/css/main.css'));
+  wp_enqueue_style('fonts', 'http://fonts.googleapis.com/css?family=Oswald:400,300');
+  wp_enqueue_style('main', get_template_directory_uri() . '/dist/css/main.min.css', false);
   if (WP_DEBUG === true) {
     //wp_enqueue_script('livereload', 'http://localhost:35729/livereload.js');
-  }
-  if (is_single()) {
-    wp_enqueue_script('comment-captcha', get_template_directory_uri() . '/js/captcha.js', false, filemtime(get_stylesheet_directory() . '/js/captcha.js'), true);
   }
   if ( is_singular() && comments_open() && get_option('thread_comments') ) {
     wp_enqueue_script( 'comment-reply' );
@@ -28,9 +25,6 @@ add_action('wp_enqueue_scripts', 'dj_load_styles' );
 
 function dj_write_header() {
   ?>
-  <style id="inline-styles">
-  <?php include(get_template_directory() . '/css/crit.css'); ?>
-  </style>
   <?php if ( !current_user_can('edit_posts') ) { ?>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -43,12 +37,7 @@ function dj_write_header() {
 
   </script>
   <?php } ?>
-  <script>
-  function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
-  loadCSS('http://fonts.googleapis.com/css?family=Oswald:400,300');
-  loadCSS('<?php echo get_template_directory_uri() . '/css/main.css'; ?>');
-  </script>
-  <script async src=<?php echo get_template_directory_uri() . '/js/site.js?' . filemtime(get_stylesheet_directory() . '/js/site.js'); ?>></script>
+  <script async src=<?php echo get_template_directory_uri() . '/dist/js/site.min.js' ?>></script>
   <?php
 }
 add_action('wp_head', 'dj_write_header');
