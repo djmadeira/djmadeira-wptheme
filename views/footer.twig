@@ -1,0 +1,17 @@
+<footer class="site-footer">
+  <nav id="nav" class="main-nav cf">
+    {% for menu in menus %}
+    <div class="menu-wrapper">
+      <h3>{{menu.title}}</h3>
+      <ul class="menu">
+        {% for item in menu.get_items %}
+          <li class="{{item.classes | join(' ')}}"><a href="{{item.get_link}}">{{item.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </nav>
+  <div class="copyright">
+    <p>&copy; DJ Madeira. Site desiged &amp; coded by me.</p>
+  </div>
+</footer>

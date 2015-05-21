@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <title>
+    {% if wp_title %}
+      {{ wp_title }} - {{ site.name }}
+    {% else %}
+      {{ site.name }}
+    {% endif %}
+  </title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if template.is_single %}
+  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:site" content="@dj_madeira" />
+  <meta property="twitter:creator" content="@dj_madeira" />
+  <meta property="twitter:title" content="{{post.title}}" />
+  <meta property="twitter:description" content="{{post.excerpt}}" />
+  <meta property="twitter:image" content="{{post.thumbnail}}"
+   />
+  <meta property="twitter:url" content="{{post.link}}" />
+  {% endif %}
+  {{ function('wp_head') }}
+</head>
+<body {{body_class}}>
+<div class="wrapper">
+<header class="main-header cf">
+  <h1 class="site-title"><a href="{{site.url}}">{{site.name}}</a></h1>
+  <a rel="navigation" class="nav-link" href="#nav">Go to navigation</a>
+  <div class="search-form">
+    <form role="search" method="get" action="{{site.url}}">
+      <input name="s" id="s" type="search" value="{{ function('the_search_query') }}">
+      <input type="submit" value="Search">
+    </form>
+  </div>
+</header>

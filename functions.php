@@ -4,9 +4,9 @@ function dj_init_stuff () {
   add_theme_support( 'menus' );
   add_theme_support( 'html5' );
   add_image_size('single', 920, 400, true);
-  register_nav_menu( 'Footer - Pages', 'For pages. Goes in the footer.' );
-  register_nav_menu( 'Footer - Categories', 'For categories. Goes in the footer.' );
-  register_nav_menu( 'Footer - Links', 'For social media and all that rot. You know the drill.' );
+  register_nav_menu( 'footer_pages', 'For pages. Goes in the footer.' );
+  register_nav_menu( 'footer_categories', 'For categories. Goes in the footer.' );
+  register_nav_menu( 'footer_links', 'For social media and all that rot. You know the drill.' );
 
 }
 add_action('init', 'dj_init_stuff');
@@ -57,4 +57,13 @@ function dj_validate_comment_captcha ($ID) {
 }
 add_action( 'pre_comment_on_post', 'dj_validate_comment_captcha' );
 
+function dj_filter_timber_context($data) {
+  $data['menus'] = array(
+    'pages' => new TimberMenu('footer_pages'),
+    'categories' => new TimberMenu('footer_categories'),
+    'links' => new TimberMenu('footer_links')
+  );
+  return $data;
+}
+add_filter('timber_context', 'dj_filter_timber_context');
 ?>

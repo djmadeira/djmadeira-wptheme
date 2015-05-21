@@ -1,0 +1,20 @@
+{% include 'header.twig' %}
+<main>
+  <section class="home-bio cf h-card">
+    <h1><img class="avatar u-photo" alt="DJ Madeira" src="{{home.profile_img}}">I'm <span class="p-name">DJ Madeira</span>. I love making stuff.</h1>
+    <a class="mf-hide u-url" href="//djmadeira.com">Home Page</a>
+    <p>I love to solve problems. I love to tell stories. This is my blog. <a href="{{site.url}}about">More about me.</a></p>
+  </section>
+  <section class="post-list">
+  {%for post in posts %}
+    <div class="post-item cf">
+      <h2 class="item-title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
+      <span class="item-meta">Category: {% for category in post.terms('categories') %}<a href="{{category.link}}">{{category.name}}</a>{% endfor %} &bull; Posted: {{ post.date }}</span>
+      <p>{{post.get_preview(55)}}</p>
+    </div>
+  {%endfor%}
+  </section>
+</main>
+{% include 'footer.twig' %}
+</body>
+</html>
