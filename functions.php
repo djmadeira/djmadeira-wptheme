@@ -14,9 +14,6 @@ add_action('init', 'dj_init_stuff');
 function dj_load_styles () {
   wp_enqueue_style('fonts', 'http://fonts.googleapis.com/css?family=Oswald:400,300');
   wp_enqueue_style('main', get_template_directory_uri() . '/dist/css/main.min.css', false);
-  if (WP_DEBUG === true) {
-    //wp_enqueue_script('livereload', 'http://localhost:35729/livereload.js');
-  }
   if ( is_singular() && comments_open() && get_option('thread_comments') ) {
     wp_enqueue_script( 'comment-reply' );
   }
@@ -24,8 +21,7 @@ function dj_load_styles () {
 add_action('wp_enqueue_scripts', 'dj_load_styles' );
 
 function dj_write_header() {
-  ?>
-  <?php if ( !current_user_can('edit_posts') ) { ?>
+  if ( !current_user_can('edit_posts') ) { ?>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -34,7 +30,6 @@ function dj_write_header() {
 
   ga('create', 'UA-52762193-1', 'auto');
   ga('send', 'pageview');
-
   </script>
   <?php } ?>
   <script async src=<?php echo get_template_directory_uri() . '/dist/js/site.min.js' ?>></script>

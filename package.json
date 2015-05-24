@@ -9,6 +9,7 @@
   "author": "DJ Madeira",
   "license": "ISC",
   "devDependencies": {
+    "broccoli": "^0.15.3",
     "broccoli-autoprefixer": "^2.1.0",
     "broccoli-clean-css": "^1.0.0",
     "broccoli-concat": "0.0.13",

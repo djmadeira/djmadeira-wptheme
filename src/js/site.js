@@ -17,7 +17,7 @@ var skillsBackground = function () {
       child.style.webkitTransform = 'scaleX('+value+')';
     }, 1, child, value);
   }
-}
+};
 
 window.addEventListener('load', function () {
   skillsBackground();

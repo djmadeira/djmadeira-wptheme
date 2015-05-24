@@ -1,6 +1,4 @@
 <?php
-get_header();
-
 $context = Timber::get_context();
 $context['posts'] = Timber::get_posts();
 $context['home'] = array(
@@ -10,6 +8,3 @@ $context['pagination'] = Timber::get_pagination();
 $templates = array('index.twig');
 
 Timber::render($templates, $context);
-
-get_footer();
-?>
