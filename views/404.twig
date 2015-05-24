@@ -1,5 +1,12 @@
-{% extends "base.twig" %}
-
-{% block content %}
-	Sorry, we couldn't find what you're looking for.
-{% endblock %}
+{% include 'header.twig' %}
+<main>
+  <h1>404 page not found</h1>
+  <p>Looks like that URL isn't actually here. Try searching instead?</p>
+  <div class="search-404">
+    <form role="search" method="get" action="{{site.url}}">
+      <input name="s" id="s" type="search" value="{{ function('the_search_query') }}">
+      <input type="submit" value="Search">
+    </form>
+  </div>
+</main>
+{% include 'footer.twig' %}

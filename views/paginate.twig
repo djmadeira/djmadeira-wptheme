@@ -1,0 +1,8 @@
+<div class="pagination">
+  {% if pagination.next %}
+    <a href="{{pagination.next.link}}" class="pagination-next">Older posts</a>
+  {% endif %}
+  {% if pagination.prev %}
+    <a href="{{pagination.prev.link}}" class="pagination-prev">Newer posts</a>
+  {% endif %}
+</div>

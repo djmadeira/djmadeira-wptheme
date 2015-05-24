@@ -1,0 +1,15 @@
+{% include 'header.twig' %}
+<h1>Results for search: {{ function('the_search_query') }}</h1>
+{% for post in posts %}
+  <div class="post-item cf">
+    <h2 class="item-title"><a href="{{post.link}}">{{post.title}}</a></h2>
+    <span class="item-meta">Category: {% for category in post.terms('categories') %}<a href="{{category.link}}">{{category.name}}</a>{% endfor %} &bull; Posted: {{ post.date|date }}</span>
+    <p>{{ post.get_preview(55) }}</p>
+    <a class="item-permalink" href="{{post.link}}">Read more&hellip;</a>
+  </div>
+{% endfor %}
+{% if posts|length == 0 %}
+  <p class="none-found">Sorry, no posts were found for your search.</p>
+{% endif %}
+{% include 'paginate.twig' %}
+{% include 'footer.twig' %}

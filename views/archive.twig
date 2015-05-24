@@ -1,0 +1,13 @@
+{% include 'header.twig' %}
+<main>
+  <h1 class="archive-title">{{ page.title }}</h1>
+  {% for post in posts %}
+    <div class="post-item cf">
+      <h2 class="item-title"><a href="{{post.link}}">{{post.title}}</a></h2>
+      <span class="item-meta">Category: {% for category in post.terms('categories') %}<a href="{{category.link}}">{{category.name}}</a> &bull; {% endfor %}Posted: {{post.post_date|date}}</span>
+      <p>{{ post.get_preview(55) }}</p>
+    </div>
+  {% endfor %}
+  {% include 'paginate.twig' %}
+</main>
+{% include 'footer.twig' %}
